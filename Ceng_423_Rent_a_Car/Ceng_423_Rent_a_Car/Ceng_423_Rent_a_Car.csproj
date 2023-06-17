@@ -6,4 +6,27 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\carousel\" />
+    <Content Remove="wwwroot\images\Cars\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\carousel\" />
+    <Folder Include="Views\Car\" />
+    <Folder Include="Views\Driver\" />
+    <Folder Include="Views\Rent\" />
+    <Folder Include="Repository\" />
+    <Folder Include="wwwroot\images\Cars\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Car\" />
+    <None Remove="Views\Driver\" />
+    <None Remove="Views\Rent\" />
+    <None Remove="Repository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
+  </ItemGroup>
 </Project>
