@@ -15,11 +15,92 @@ namespace Ceng_423_Rent_a_Car.Repository
         private readonly IConfiguration configuration;
         private readonly string dbcon = "";
         private readonly IWebHostEnvironment webhost;
+
         public Data(IConfiguration configuration, IWebHostEnvironment webhost)
         {
             this.configuration = configuration;
             dbcon = this.configuration.GetConnectionString("dbConnection");
             this.webhost = webhost;
+        }
+        [SupportedOSPlatform("windows")]
+
+        public List<string> GetModel(string brand)
+        {
+            List<string> model = new List<string>();
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                string qry = "Select distinct Model from Cars where Brand='"+brand+"'";
+                OleDbDataReader reader = GetData(qry, con);
+                while (reader.Read())
+                {
+                    model.Add(reader["Model"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return model;
+        }
+        [SupportedOSPlatform("windows")]
+
+        public List<string> GetBrand()
+        {
+            List<string> brand = new List<string>();
+            OleDbConnection con = GetOleDbConnection();
+
+            try
+            {
+                con.Open();
+                string qry = "Select distinct Brand from Cars;";
+                OleDbDataReader reader = GetData(qry, con);
+                while (reader.Read())
+                {
+                    brand.Add(reader["Brand"].ToString());
+                }
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            finally 
+            {
+                con.Close(); 
+            }
+
+            return brand;
+        }
+
+        [SupportedOSPlatform("windows")]
+        public bool BookingNow(Rent rent)
+        {
+            bool isSaved = false;
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                rent.TotalAmount = rent.TotalRun * rent.Rate;
+                string qry = String.Format("Insert Info Rents(PickUp,DropOff,PickUpDate,DropOffDate.TotalRun,Rate,TotalAmount,Brand,Model,DriverId,CustomerName,CustomerContact) values(" +
+                    "'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')",
+                    rent.PickUp,rent.DropOff,rent.PickUpDate,rent.DropOffDate,rent.TotalRun,rent.Rate,rent.TotalAmount,
+                    rent.Brand,rent.Model,rent.DriverId,rent.CustomerName,rent.CustomerContact);
+                isSaved = SaveData(qry, con);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return isSaved;
         }
         [SupportedOSPlatform("windows")]
 
@@ -55,7 +136,7 @@ namespace Ceng_423_Rent_a_Car.Repository
             {
                 con.Close();
             }
-            return cars;
+            return drivers;
 
         }
 
