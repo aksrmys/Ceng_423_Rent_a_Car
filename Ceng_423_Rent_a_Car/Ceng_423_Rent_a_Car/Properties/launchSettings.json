@@ -1,21 +1,21 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:2991",
-      "sslPort": 44372
+      "applicationUrl": "http://localhost:29575",
+      "sslPort": 44302
     }
   },
   "profiles": {
     "Ceng_423_Rent_a_Car": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7079;http://localhost:5147",
+      "applicationUrl": "https://localhost:7294;http://localhost:5037",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
