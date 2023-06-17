@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "EP1JhYkc6JBvUFMj35JBb5/eCwoN9SjPIgi1dTKKS+0Pnfl36w+puEJLJGQu/a/C+98/j3A/VZIo/2XmmhIzag==",
+  "dgSpecHash": "r7msjUm+F011Wd8u4+5a/CF+yVQ2AIW6XpslXC2XXQpphasKhKLWQMcJT+WRM/Wxvze3D9564q6X/lSh7HGbsQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MELIH BEY\\source\\repos\\Ceng_423_Rent_a_Car\\Ceng_423_Rent_a_Car\\Ceng_423_Rent_a_Car.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/rumeysaakis/Projects/Ceng_423_Rent_a_Car/Ceng_423_Rent_a_Car/Ceng_423_Rent_a_Car.csproj",
+  "expectedPackageFiles": [
+    "/Users/rumeysaakis/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.configuration.configurationmanager/6.0.0/system.configuration.configurationmanager.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.data.oledb/6.0.0/system.data.oledb.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.diagnostics.performancecounter/6.0.0/system.diagnostics.performancecounter.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.security.accesscontrol/6.0.0/system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.security.cryptography.protecteddata/6.0.0/system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.security.permissions/6.0.0/system.security.permissions.6.0.0.nupkg.sha512",
+    "/Users/rumeysaakis/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
