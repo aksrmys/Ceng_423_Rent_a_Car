@@ -17,7 +17,6 @@
     <Folder Include="wwwroot\images\carousel\" />
     <Folder Include="Views\Car\" />
     <Folder Include="Views\Driver\" />
-    <Folder Include="Views\Rent\" />
     <Folder Include="Repository\" />
     <Folder Include="wwwroot\images\Cars\" />
     <Folder Include="wwwroot\images\drivers\" />
