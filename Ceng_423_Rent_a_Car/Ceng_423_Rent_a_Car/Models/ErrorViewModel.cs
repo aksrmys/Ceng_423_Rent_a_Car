@@ -1,9 +1,9 @@
-namespace Ceng_423_Rent_a_Car.Models
-{
-	public class ErrorViewModel
-	{
-		public string? RequestId { get; set; }
+﻿namespace Ceng_423_Rent_a_Car.Models;
 
-		public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-	}
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
+
