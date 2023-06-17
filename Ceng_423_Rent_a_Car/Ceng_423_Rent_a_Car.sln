@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.6.33723.286
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceng_423_Rent_a_Car", "Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car.csproj", "{C080453E-30C0-44D5-957A-907ED0BF90FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceng_423_Rent_a_Car", "Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car.csproj", "{B786A272-BE8F-414F-80AE-6E630C66E5EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C080453E-30C0-44D5-957A-907ED0BF90FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C080453E-30C0-44D5-957A-907ED0BF90FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C080453E-30C0-44D5-957A-907ED0BF90FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C080453E-30C0-44D5-957A-907ED0BF90FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B786A272-BE8F-414F-80AE-6E630C66E5EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B786A272-BE8F-414F-80AE-6E630C66E5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B786A272-BE8F-414F-80AE-6E630C66E5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B786A272-BE8F-414F-80AE-6E630C66E5EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CCB56AEE-F52D-4C85-917E-B5DD8159CF56}
+		SolutionGuid = {29FAFC61-A9E7-4D2A-BEF1-6A77587187D3}
 	EndGlobalSection
 EndGlobal
