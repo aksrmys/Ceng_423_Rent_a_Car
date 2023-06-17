@@ -23,6 +23,70 @@ namespace Ceng_423_Rent_a_Car.Repository
         }
         [SupportedOSPlatform("windows")]
 
+        public List<Driver> GetAllDrivers()
+        {
+            List<Driver> drivers = new List<Driver>();
+            Driver dr;
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                string qry = "Select * from Drivers";
+                OleDbDataReader reader = GetData(qry, con);
+                while (reader.Read())
+                {
+                    dr = new Driver();
+                    dr.Id = int.Parse(reader["ID"].ToString());
+                    dr.Name = reader["DriverName"].ToString();
+                    dr.Address = reader["Address"].ToString();
+                    dr.MobileNo = reader["MobileNo"].ToString();
+                    dr.Age = int.Parse(reader["Age"].ToString());
+                    dr.Experience = int.Parse(reader["Experience"].ToString());
+                    dr.ImagePath = reader["ImagePath"].ToString();
+                    drivers.Add(dr);
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return cars;
+
+        }
+
+        [SupportedOSPlatform("windows")]
+
+        public bool AddDriver(Driver newdriver)
+        {
+            bool isSaved = false;
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                newdriver.ImagePath = SaveImage(newdriver.DriverImage, "drivers");
+                string qry = String.Format("Insert into Drivers(DriverName,Address,MobileNo,Age,Experience,ImagePath) values(" + "'{0}', '{1}', {2},'{3}', '{4}', '{5}')", newdriver.Name, newdriver.Address, newdriver.MobileNo, newdriver.Age, newdriver.Experience,newdriver.ImagePath);
+                isSaved = SaveData(qry, con);
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return isSaved;
+        }
+
+
+        [SupportedOSPlatform("windows")]
+
         public List<Car> GetAllCars()
         {
             List<Car> cars = new List<Car>();

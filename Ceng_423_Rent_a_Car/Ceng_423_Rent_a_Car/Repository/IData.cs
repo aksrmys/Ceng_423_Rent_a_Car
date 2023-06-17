@@ -6,6 +6,9 @@ namespace Ceng_423_Rent_a_Car.Repository
 	{
 		bool AddNewCar(Car newcar);
 		List<Car> GetAllCars();
-	}
+
+		bool AddDriver(Driver newdriver);
+        List<Driver> GetAllDrivers();
+    }
 }
 
