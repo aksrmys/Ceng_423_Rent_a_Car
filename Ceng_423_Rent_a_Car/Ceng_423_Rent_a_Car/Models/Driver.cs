@@ -30,5 +30,18 @@ namespace Ceng_423_Rent_a_Car.Models
 
         public IFormFile DriverImage { get; set; }
     }
+
+    public class DriverHistory
+    {
+
+        public Driver Driver { get; set; }
+
+        public List<Rent> Rents { get; set; }
+
+        public DriverHistory()
+        {
+            Rents = new List<Rent>();
+        }
+    }
 }
 
