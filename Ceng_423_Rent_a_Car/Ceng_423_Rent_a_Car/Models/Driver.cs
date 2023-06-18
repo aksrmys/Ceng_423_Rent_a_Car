@@ -28,7 +28,7 @@ namespace Ceng_423_Rent_a_Car.Models
         public string? ImagePath { get; set; }
         [Required]
 
-        public IFormFile DriverImage { get; set; }
+        public IFormFile? DriverImage { get; set; }
     }
 
     public class DriverHistory

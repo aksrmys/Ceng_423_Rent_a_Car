@@ -26,7 +26,7 @@ namespace Ceng_423_Rent_a_Car.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            return View(); 
         }
         [HttpPost]
         public IActionResult Add(Rent rent)
