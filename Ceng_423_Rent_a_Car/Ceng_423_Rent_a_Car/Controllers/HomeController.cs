@@ -1,21 +1,24 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Ceng_423_Rent_a_Car.Models;
-
+using Ceng_423_Rent_a_Car.Repository;
 namespace Ceng_423_Rent_a_Car.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IData data;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger,IData data)
     {
         _logger = logger;
+        this.data = data;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var list = data.GetAllCars();
+        return View(list);
     }
 
     public IActionResult Privacy()

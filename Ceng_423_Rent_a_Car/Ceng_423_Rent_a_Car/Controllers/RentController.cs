@@ -20,7 +20,8 @@ namespace Ceng_423_Rent_a_Car.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            var list=data.GetAllRents();
+            return View(list);
         }
 
         public IActionResult Add()

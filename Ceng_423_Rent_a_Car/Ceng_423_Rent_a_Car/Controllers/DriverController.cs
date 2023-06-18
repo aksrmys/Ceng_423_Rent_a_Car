@@ -41,6 +41,12 @@ namespace Ceng_423_Rent_a_Car.Controllers
             ModelState.Clear();
             return View();
         }
+
+        public IActionResult History(int Id)
+        {
+            var list = data.GetDriverHistory(Id);
+            return View(list);
+        }
     }
 }
 
