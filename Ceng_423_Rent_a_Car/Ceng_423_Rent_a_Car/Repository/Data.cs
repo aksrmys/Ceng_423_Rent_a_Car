@@ -24,6 +24,105 @@ namespace Ceng_423_Rent_a_Car.Repository
         }
         [SupportedOSPlatform("windows")]
 
+        public DriverHistory GetDriverHistory(int Id)
+        {
+            DriverHistory hist = new DriverHistory();
+            Driver dr = new Driver();
+            Rent rent;
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                string qry = String.Format("Select r.ID,r.PickUp,r.DropOff,r.PickUpDate,r.DropOffDate,r.TotalRun,r.Brand,r.Model,d.DriverName,d.Address,d.MobileNo,d.Experince,d.ImagePath from Rents r inner join Drivers d on r.DriverId" +
+                    "on r.DriverId = d.ID where d.ID = {0};", Id);
+
+                OleDbDataReader reader = GetData(qry, con);
+                if (!reader.HasRows)
+                {
+                    hist.Driver = dr;
+                }
+                int i = 0;
+                while (reader.Read())
+                {
+                    if (i == 0)
+                    {
+                        dr.Name = reader["DriverName"].ToString();
+                        dr.Address = reader["Address"].ToString();
+                        dr.MobileNo = reader["MobileNo"].ToString();
+                        dr.Experience = int.Parse(reader["Experince"].ToString());
+                        dr.ImagePath = reader["ImagePath"].ToString();
+                        hist.Driver = dr;
+                    }
+                    i = i + 1;
+                    rent = new Rent();
+                    rent.Id = int.Parse(reader["ID"].ToString());
+                    rent.PickUp = reader["Pickup"].ToString();
+                    rent.DropOff = reader["DropOff"].ToString();
+                    rent.PickUpDate = Convert.ToDateTime(reader["PickUpDate"].ToString());
+                    rent.DropOffDate = Convert.ToDateTime(reader["DropOffDate"].ToString());
+                    rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
+                    rent.Brand = reader["Brand"].ToString();
+                    rent.Model = reader["Model"].ToString();
+                    hist.Rents.Add(rent);
+
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return hist;
+        }
+
+
+        [SupportedOSPlatform("windows")]
+		public List<Rent> GetAllRents()
+        {
+            List<Rent> rents = new List<Rent>();
+            Rent rent;
+            OleDbConnection con = GetOleDbConnection();
+            try
+            {
+                con.Open();
+                string qry = "Select * from Rents;";
+                OleDbDataReader reader = GetData(qry, con);
+                while(reader.Read())
+                {
+                    rent= new Rent();
+                    rent.Id = int.Parse(reader["ID"].ToString());
+                    rent.PickUp = reader["PickUp"].ToString();
+					rent.DropOff = reader["DropOff"].ToString();
+                    rent.PickUpDate = Convert.ToDateTime(reader["PickUpDate"].ToString());
+					rent.DropOffDate = Convert.ToDateTime(reader["DropOffDate"].ToString());
+					rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
+					rent.Rate = int.Parse(reader["Rate"].ToString());
+					rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
+                    rent.Brand = reader["Brand"].ToString() ;
+					rent.Model = reader["Model"].ToString();
+					rent.DriverId = int.Parse(reader["DriverId"].ToString());
+					rent.CustomerName = reader["CustomerName"].ToString();
+					rent.CustomerContact = reader["CustomerContactNo"].ToString();
+                    rents.Add(rent);
+				}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return rents;
+        }
+        [SupportedOSPlatform("windows")]
+
         public List<string> GetModel(string brand)
         {
             List<string> model = new List<string>();
@@ -86,7 +185,7 @@ namespace Ceng_423_Rent_a_Car.Repository
             {
                 con.Open();
                 rent.TotalAmount = rent.TotalRun * rent.Rate;
-                string qry = String.Format("Insert Info Rents(PickUp,DropOff,PickUpDate,DropOffDate.TotalRun,Rate,TotalAmount,Brand,Model,DriverId,CustomerName,CustomerContact) values(" +
+                string qry = String.Format("Insert Info Rents(PickUp,DropOff,PickUpDate,DropOffDate.TotalRun,Rate,TotalAmount,Brand,Model,DriverId,CustomerName,CustomerContactNo) values(" +
                     "'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')",
                     rent.PickUp,rent.DropOff,rent.PickUpDate,rent.DropOffDate,rent.TotalRun,rent.Rate,rent.TotalAmount,
                     rent.Brand,rent.Model,rent.DriverId,rent.CustomerName,rent.CustomerContact);

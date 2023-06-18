@@ -19,6 +19,10 @@ namespace Ceng_423_Rent_a_Car.Repository
 
 		List<string> GetModel(string brand);
 
+		List<Rent> GetAllRents();
+
+		DriverHistory GetDriverHistory(int Id);
+
     }
 }
 
