@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model IEnumerable<Ceng_423_Rent_a_Car.Models.Rent>
 @{
     ViewData["Title"] = "Rent";
 }
@@ -23,14 +24,74 @@
                                 <th>DropOff Date</th>
                                 <th>Brand</th>
                                 <th>Model</th>
-                                <th>Total Run</th>
                                 <th></th>
                                 
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.PickUp</td>
+                                    <td>@item.DropOff</td>
+                                    <td>@item.PickUpDate</td>
+                                    <td>@item.DropOffDate</td>
+                                    <td>@item.Brand</td>
+                                    <td>@item.Model</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary p-2" type="button"
+                                                onclick="showMoreDetails(@item.Id)" id="row-mbtn-@item.Id">
+                                            More Details
+                                        </button>
+                                        <button class="btn btn-sm btn-primary p-2" type="button" style="display:none;"
+                                                onclick="hideDetails(@item.Id)" id="row-hbtn-@item.Id">
+                                            Hide Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr itemid="row-@item.Id" style="display:none;">
+                                    <td colspan="7">
+                                        <table class="table table-responsive table-bordered text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Customer Name</th>
+                                                    <th>Customer Mobile No</th>
+                                                    <th>Rate</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Total Run</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>@item.CustomerName</td>
+                                                    <td>@item.CustomerContact</td>
+                                                    <td>@item.Rate</td>
+                                                    <td>@item.TotalAmount</td>
+                                                    <td>@item.TotalRun</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>src = "~/lib/jquery/dist/jquery.min.js"</script>
+<script type="text/javascript">
+    function.showMoreDetails(id){
+        $('#row-'+id).show();
+        $('#row-mbtn-'+id).hide();
+        $('#row-hbtn-'+id).show();
+    }    
+    function.hideDetails(id){
+        $('#row-' + id).hide();
+        $('#row-mbtn-' + id).show();
+        $('#row-hbtn-' + id).hide();
+    }
+</script>

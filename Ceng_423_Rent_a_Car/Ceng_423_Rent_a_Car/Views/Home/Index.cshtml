@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Ceng_423_Rent_a_Car.Models.Car>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -19,5 +20,23 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row nt-3">
+        @foreach (var item in Model.ToList())
+        {
+        <div class="col-4">
+            <div class="nt-2 p-3 shadow rounded">
+                <div class="card" style="height:350px">
+                    <img src="~/images/cars/@item.ImagePath" class="card-img-top h-50" />
+                    <div class="card-body">
+                        <h5 class="text-info">@item.Brand @item.Model</h5>
+                            <p class="card-text"><span class="fw-bold">Engine </span>@item.Engine </p>
+                            <p class="card-text"><span class="fw-bold">Fuel Type </span>@item.FuelType </p>
+                            <p class="card-text"><span class="fw-bold">SeatingCapacity </span>@item.SeatingCapacity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
     </div>
 </div>
