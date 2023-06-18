@@ -1,5 +1,7 @@
 ﻿using Ceng_423_Rent_a_Car.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
