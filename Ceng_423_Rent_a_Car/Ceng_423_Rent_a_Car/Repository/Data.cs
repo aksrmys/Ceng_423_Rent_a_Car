@@ -1,400 +1,785 @@
-﻿using System;
+﻿using Ceng_423_Rent_a_Car.Models;
+using Microsoft.Data.SqlClient;
+
+
 using Ceng_423_Rent_a_Car.Models;
-using Ceng_423_Rent_a_Car.Repository;
-using System.Data.OleDb;
-using System.Drawing;
-using System.Runtime.Versioning;
-using Microsoft.AspNetCore.Hosting;
-using System.Security.AccessControl;
+
+using Microsoft.Data.SqlClient;
+
+ 
 
 namespace Ceng_423_Rent_a_Car.Repository
+
 {
 
+
+
     public class Data : IData
+
     {
+
         private readonly IConfiguration configuration;
-        private readonly string dbcon = "";
+
+        private readonly string connection = "";
+
         private readonly IWebHostEnvironment webhost;
 
+
+
         public Data(IConfiguration configuration, IWebHostEnvironment webhost)
+
         {
+
             this.configuration = configuration;
-            dbcon = this.configuration.GetConnectionString("dbConnection");
+
+            connection = this.configuration.GetConnectionString("DefaultConnection");
+
             this.webhost = webhost;
+
         }
-        [SupportedOSPlatform("windows")]
+
+
+
+
 
         public DriverHistory GetDriverHistory(int Id)
-        {
-            DriverHistory hist = new DriverHistory();
-            Driver dr = new Driver();
-            Rent rent;
-            OleDbConnection con = GetOleDbConnection();
-            try
-            {
-                con.Open();
-                string qry = String.Format("Select r.ID,r.PickUp,r.DropOff,r.PickUpDate,r.DropOffDate,r.TotalRun,r.Brand,r.Model,d.DriverName,d.Address,d.MobileNo,d.Experince,d.ImagePath from Rents r inner join Drivers d on r.DriverId" +
-                    "on r.DriverId = d.ID where d.ID = {0};", Id);
 
-                OleDbDataReader reader = GetData(qry, con);
+        {
+
+            DriverHistory hist = new DriverHistory();
+
+            Driver dr = new Driver();
+
+            Rent rent;
+
+            SqlConnectionClass con = GetSqlConnection();
+
+            try
+
+            {
+
+                con.Open();
+
+                string qry = String.Format("SELECT r.ID, r.PickUp, r.DropOff, r.PickUpDate, r.DropOffDate, r.TotalRun, r.Brand, r.Model, d.DriverName, d.Address, d.MobileNo, d.Experience, d.ImagePath FROM Rents r INNER JOIN Drivers d ON r.DriverId = d.ID WHERE d.ID = {0};", Id);
+
+
+
+                SqlCommand cmd = new SqlCommand(qry, con);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+
+
                 if (!reader.HasRows)
+
                 {
+
                     hist.Driver = dr;
+
                 }
+
+
+
                 int i = 0;
+
                 while (reader.Read())
+
                 {
+
                     if (i == 0)
+
                     {
+
                         dr.Name = reader["DriverName"].ToString();
+
                         dr.Address = reader["Address"].ToString();
+
                         dr.MobileNo = reader["MobileNo"].ToString();
-                        dr.Experience = int.Parse(reader["Experince"].ToString());
+
+                        dr.Experience = int.Parse(reader["Experience"].ToString());
+
                         dr.ImagePath = reader["ImagePath"].ToString();
+
                         hist.Driver = dr;
+
                     }
+
+
+
                     i = i + 1;
+
                     rent = new Rent();
+
                     rent.Id = int.Parse(reader["ID"].ToString());
-                    rent.PickUp = reader["Pickup"].ToString();
+
+                    rent.PickUp = reader["PickUp"].ToString();
+
                     rent.DropOff = reader["DropOff"].ToString();
+
                     rent.PickUpDate = Convert.ToDateTime(reader["PickUpDate"].ToString());
+
                     rent.DropOffDate = Convert.ToDateTime(reader["DropOffDate"].ToString());
+
                     rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
+
                     rent.Brand = reader["Brand"].ToString();
+
                     rent.Model = reader["Model"].ToString();
+
                     hist.Rents.Add(rent);
 
                 }
+
             }
 
             catch (Exception)
+
             {
+
                 throw;
+
             }
+
             finally
+
             {
+
                 con.Close();
+
             }
+
+
 
             return hist;
+
         }
 
 
-        [SupportedOSPlatform("windows")]
-		public List<Rent> GetAllRents()
+
+        private SqlConnectionClass GetSqlConnection()
+
         {
-            List<Rent> rents = new List<Rent>();
-            Rent rent;
-            OleDbConnection con = GetOleDbConnection();
-            try
-            {
-                con.Open();
-                string qry = "Select * from Rents;";
-                OleDbDataReader reader = GetData(qry, con);
-                while(reader.Read())
-                {
-                    rent= new Rent();
-                    rent.Id = int.Parse(reader["ID"].ToString());
-                    rent.PickUp = reader["PickUp"].ToString();
-					rent.DropOff = reader["DropOff"].ToString();
-                    rent.PickUpDate = Convert.ToDateTime(reader["PickUpDate"].ToString());
-					rent.DropOffDate = Convert.ToDateTime(reader["DropOffDate"].ToString());
-					rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
-					rent.Rate = int.Parse(reader["Rate"].ToString());
-					rent.TotalRun = int.Parse(reader["TotalRun"].ToString());
-                    rent.Brand = reader["Brand"].ToString() ;
-					rent.Model = reader["Model"].ToString();
-					rent.DriverId = int.Parse(reader["DriverId"].ToString());
-					rent.CustomerName = reader["CustomerName"].ToString();
-					rent.CustomerContact = reader["CustomerContactNo"].ToString();
-                    rents.Add(rent);
-				}
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-            return rents;
+
+            throw new NotImplementedException();
+
         }
-        [SupportedOSPlatform("windows")]
+
+
+
+        public List<Rent> GetAllRents()
+
+        {
+
+            List<Rent> rents = new List<Rent>();
+
+            Rent rent;
+
+            SqlConnectionClass con = GetSqlConnection();
+
+            try
+
+            {
+
+                con.Open();
+
+                string qry = "SELECT * FROM Rents;";
+
+                SqlCommand cmd = new SqlCommand(qry, con);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                while (reader.Read())
+
+                {
+
+                    rent = new Rent();
+
+                    rent.Id = int.Parse(reader["ID"].ToString());
+
+                    rent.PickUp = reader["PickUp"].ToString();
+
+                    rent.DropOff = reader["DropOff"].ToString();
+
+                    rent.PickUpDate = Convert.ToDateTime(reader["PickUpDate"].ToString());
+
+                    rent.DropOffDate = Convert.ToDateTime(reader["DropOffDate"].ToString());
+
+                    rent.TotalRun = int.Parse(reader["TotalRun"].rent.Brand = reader["Brand"].ToString());
+
+                    rent.Model = reader["Model"].ToString();
+
+                    rent.DriverId = int.Parse(reader["DriverId"].ToString());
+
+                    rent.CustomerName = reader["CustomerName"].ToString();
+
+                    rent.CustomerContact = reader["CustomerContactNo"].ToString();
+
+                    rents.Add(rent);
+
+                }
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+            finally
+
+            {
+
+                con.Close();
+
+            }
+
+            return rents;
+
+        }
+
+
 
         public List<string> GetModel(string brand)
+
         {
-            List<string> model = new List<string>();
-            OleDbConnection con = GetOleDbConnection();
-            try
+
+            List<string> models = new List<string>();
+
+            SqlConnectionClass con = GetSqlConnection();
+
             {
-                con.Open();
-                string qry = "Select distinct Model from Cars where Brand='"+brand+"'";
-                OleDbDataReader reader = GetData(qry, con);
-                while (reader.Read())
+
+                try
+
                 {
-                    model.Add(reader["Model"].ToString());
+
+                    con.Open();
+
+                    string qry = "SELECT DISTINCT Model FROM Cars WHERE Brand=@Brand";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    cmd.Parameters.AddWithValue("@Brand", brand);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+
+                    {
+
+                        models.Add(reader["Model"].ToString());
+
+                    }
+
                 }
+
+                catch (Exception)
+
+                {
+
+                    throw;
+
+                }
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-            return model;
+
+
+
+            return models;
+
         }
-        [SupportedOSPlatform("windows")]
+
+
 
         public List<string> GetBrand()
-        {
-            List<string> brand = new List<string>();
-            OleDbConnection con = GetOleDbConnection();
 
-            try
+        {
+
+            List<string> brands = new List<string>();
+
+            SqlConnectionClass con = GetSqlConnection();
+
             {
-                con.Open();
-                string qry = "Select distinct Brand from Cars;";
-                OleDbDataReader reader = GetData(qry, con);
-                while (reader.Read())
+
+                try
+
                 {
-                    brand.Add(reader["Brand"].ToString());
+
+                    con.Open();
+
+                    string qry = "SELECT DISTINCT Brand FROM Cars";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+
+                    {
+
+                        brands.Add(reader["Brand"].ToString());
+
+                    }
+
                 }
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-            finally 
-            {
-                con.Close(); 
-            }
 
-            return brand;
-        }
+                catch (Exception)
 
-        [SupportedOSPlatform("windows")]
-        public bool BookingNow(Rent rent)
-        {
-            bool isSaved = false;
-            OleDbConnection con = GetOleDbConnection();
-            try
-            {
-                con.Open();
-                rent.TotalAmount = rent.TotalRun * rent.Rate;
-                string qry = String.Format("Insert Info Rents(PickUp,DropOff,PickUpDate,DropOffDate.TotalRun,Rate,TotalAmount,Brand,Model,DriverId,CustomerName,CustomerContactNo) values(" +
-                    "'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')",
-                    rent.PickUp,rent.DropOff,rent.PickUpDate,rent.DropOffDate,rent.TotalRun,rent.Rate,rent.TotalAmount,
-                    rent.Brand,rent.Model,rent.DriverId,rent.CustomerName,rent.CustomerContact);
-                isSaved = SaveData(qry, con);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-            return isSaved;
-        }
-        [SupportedOSPlatform("windows")]
-
-        public List<Driver> GetAllDrivers()
-        {
-            List<Driver> drivers = new List<Driver>();
-            Driver dr;
-            OleDbConnection con = GetOleDbConnection();
-            try
-            {
-                con.Open();
-                string qry = "Select * from Drivers";
-                OleDbDataReader reader = GetData(qry, con);
-                while (reader.Read())
                 {
-                    dr = new Driver();
-                    dr.Id = int.Parse(reader["ID"].ToString());
-                    dr.Name = reader["DriverName"].ToString();
-                    dr.Address = reader["Address"].ToString();
-                    dr.MobileNo = reader["MobileNo"].ToString();
-                    dr.Age = int.Parse(reader["Age"].ToString());
-                    dr.Experience = int.Parse(reader["Experience"].ToString());
-                    dr.ImagePath = reader["ImagePath"].ToString();
-                    drivers.Add(dr);
+
+                    throw;
+
                 }
+
             }
 
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-            return drivers;
+
+
+            return brands;
 
         }
 
-        [SupportedOSPlatform("windows")]
+
+
+
+
+        public List<string> GetModel(string brand)
+
+        {
+
+            List<string> models = new List<string>();
+
+            SqlConnectionClass con = GetSqlConnection();
+
+            {
+
+                try
+
+                {
+
+                    con.Open();
+
+                    string qry = "SELECT DISTINCT Model FROM Cars WHERE Brand=@Brand";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    cmd.Parameters.AddWithValue("@Brand", brand);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+
+                    {
+
+                        models.Add(reader["Model"].ToString());
+
+                    }
+
+                }
+
+                catch (Exception)
+
+                {
+
+                    throw;
+
+                }
+
+            }
+
+
+
+            return models;
+
+        }
+
+
+
+        public List<string> GetBrand()
+
+        {
+
+            List<string> brands = new List<string>();
+
+            SqlConnectionClass con = GetSqlConnection();
+
+            {
+
+                try
+
+                {
+
+                    con.Open();
+
+                    string qry = "SELECT DISTINCT Brand FROM Cars";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+
+                    {
+
+                        brands.Add(reader["Brand"].ToString());
+
+                    }
+
+                }
+
+                catch (Exception)
+
+                {
+
+                    throw;
+
+                }
+
+            }
+
+
+
+            return brands;
+
+        }
+
+
 
         public bool AddDriver(Driver newdriver)
+
         {
+
             bool isSaved = false;
-            OleDbConnection con = GetOleDbConnection();
-            try
+
+            SqlConnectionClass con = GetSqlConnection();
+
             {
-                con.Open();
-                newdriver.ImagePath = SaveImage(newdriver.DriverImage, "drivers");
-                string qry = String.Format("Insert into Drivers(DriverName,Address,MobileNo,Age,Experience,ImagePath) values(" + "'{0}', '{1}', {2},'{3}', '{4}', '{5}')", newdriver.Name, newdriver.Address, newdriver.MobileNo, newdriver.Age, newdriver.Experience,newdriver.ImagePath);
-                isSaved = SaveData(qry, con);
+
+                try
+
+                {
+
+                    con.Open();
+
+                    newdriver.ImagePath = SaveImage(newdriver.DriverImage, "drivers");
+
+                    string qry = @"INSERT INTO Drivers (DriverName, Address, MobileNo, Age, Experience, ImagePath)
+
+                            VALUES (@DriverName, @Address, @MobileNo, @Age, @Experience, @ImagePath)";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    cmd.Parameters.AddWithValue("@DriverName", newdriver.Name);
+
+                    cmd.Parameters.AddWithValue("@Address", newdriver.Address);
+
+                    cmd.Parameters.AddWithValue("@MobileNo", newdriver.MobileNo);
+
+                    cmd.Parameters.AddWithValue("@Age", newdriver.Age);
+
+                    cmd.Parameters.AddWithValue("@Experience", newdriver.Experience);
+
+                    cmd.Parameters.AddWithValue("@ImagePath", newdriver.ImagePath);
+
+
+
+                    isSaved = cmd.ExecuteNonQuery() > 0;
+
+                }
+
+                catch (Exception)
+
+                {
+
+                    throw;
+
+                }
+
             }
 
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
+
+
             return isSaved;
+
         }
 
 
-        [SupportedOSPlatform("windows")]
 
         public List<Car> GetAllCars()
+
         {
+
             List<Car> cars = new List<Car>();
-            Car car;
-            OleDbConnection con = GetOleDbConnection();
-            try
+
+            SqlConnectionClass con = GetSqlConnection();
+
             {
-                con.Open();
-                string qry = "Select * from Cars";
-                OleDbDataReader reader = GetData(qry, con);
-                while (reader.Read())
+
+                try
+
                 {
-                    car = new Car();
-                    car.Id = int.Parse(reader ["ID"].ToString());
-                    car.Brand = reader["Brand"].ToString();
-                    car.Model = reader["Model"].ToString();
-                    car.PassingYear = int.Parse(reader ["PassingYear"].ToString());
-                    car.Engine = reader["Engine"].ToString();
-                    car.FuelType = reader["FuelType"].ToString();
-                    car.ImagePath = reader["ImagePath"].ToString();
-                    car.CarNumber = reader["CarNumber"].ToString();
-                    car.SeatingCapacity = int.Parse(reader["SeatingCapacity"].ToString());
-                    cars.Add(car);
+
+                    con.Open();
+
+                    string qry = "SELECT * FROM Cars";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+
+                    {
+
+                        Car car = new Car();
+
+                        car.Id = Convert.ToInt32(reader["ID"]);
+
+                        car.Brand = reader["Brand"].ToString();
+
+                        car.Model = reader["Model"].ToString();
+
+                        car.PassingYear = Convert.ToInt32(reader["PassingYear"]);
+
+                        car.Engine = reader["Engine"].ToString();
+
+                        car.FuelType = reader["FuelType"].ToString();
+
+                        car.ImagePath = reader["ImagePath"].ToString();
+
+                        car.CarNumber = reader["CarNumber"].ToString();
+
+                        car.SeatingCapacity = Convert.ToInt32(reader["SeatingCapacity"]);
+
+                        cars.Add(car);
+
+                    }
+
                 }
+
+                catch (Exception)
+
+                {
+
+                    throw;
+
+                }
+
             }
 
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
+
+
             return cars;
 
         }
 
-        [SupportedOSPlatform("windows")]
 
-        private OleDbDataReader GetData(string qry, OleDbConnection con)
+
+        private SqlDataReader GetData(string qry, SqlConnection con)
+
         {
-            OleDbDataReader reader = null;
+
+            SqlDataReader reader = null;
+
             try
+
             {
-                OleDbCommand cmd = new OleDbCommand(qry, con);
+
+                SqlCommand cmd = new SqlCommand(qry, con);
+
                 reader = cmd.ExecuteReader();
+
             }
 
             catch (Exception)
+
             {
+
                 throw;
+
             }
+
             return reader;
+
         }
 
-        [SupportedOSPlatform("windows")]
 
 
         public bool AddNewCar(Car newcar)
-        {
-            bool isSaved = false;
-            OleDbConnection con = GetOleDbConnection();
-            try
-            {
-                con.Open();
-                newcar.ImagePath = SaveImage(newcar.CarImage, "cars");
-                string qry = String.Format("Insert into Cars(Brand,Model,PassingYear,CarNumber,Engine,FuelType,ImagePath,SeatingCapacity) values(" + "'{0}', '{1}', {2},'{3}', '{4}', '{5}', '{6}', {7})", newcar.Brand, newcar.Model, newcar.PassingYear, newcar.CarNumber, newcar.Engine, newcar.FuelType, newcar.ImagePath, newcar.SeatingCapacity);
-                isSaved = SaveData(qry, con);
-            }
 
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-            return isSaved;
-        }
-        private string SaveImage(IFormFile file, string folderName)
         {
-            string imagepath = "";
-            try
+
+            bool isSaved = false;
+
+            SqlConnectionClass con = GetSqlConnection();
+
             {
-                string uploadfolder = Path.Combine(webhost.WebRootPath, "images/" + folderName);
-                imagepath = Guid.NewGuid().ToString() + "_" + file.FileName;
-                string filepath = Path.Combine(uploadfolder, imagepath);
-                using (var filestream = new FileStream(filepath, FileMode.Create))
+
+                try
+
                 {
-                    file.CopyTo(filestream);
+
+                    con.Open();
+
+                    newcar.ImagePath = SaveImage(newcar.CarImage, "cars");
+
+                    string qry = @"INSERT INTO Cars (Brand, Model, PassingYear, CarNumber, Engine, FuelType, ImagePath, SeatingCapacity)
+
+                            VALUES (@Brand, @Model, @PassingYear, @CarNumber, @Engine, @FuelType, @ImagePath, @SeatingCapacity)";
+
+                    SqlCommand cmd = new SqlCommand(qry, con);
+
+                    cmd.Parameters.AddWithValue("@Brand", newcar.Brand);
+
+                    cmd.Parameters.AddWithValue("@Model", newcar.Model);
+
+                    cmd.Parameters.AddWithValue("@PassingYear", newcar.PassingYear);
+
+                    cmd.Parameters.AddWithValue("@CarNumber", newcar.CarNumber);
+
+                    cmd.Parameters.AddWithValue("@Engine", newcar.Engine);
+
+                    cmd.Parameters.AddWithValue("@FuelType", newcar.FuelType);
+
+                    cmd.Parameters.AddWithValue("@ImagePath", newcar.ImagePath);
+
+                    cmd.Parameters.AddWithValue("@SeatingCapacity", newcar.SeatingCapacity);
+
+
+
+                    isSaved = cmd.ExecuteNonQuery() > 0;
+
                 }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return imagepath;
-        }
-        [SupportedOSPlatform("windows")] // adding because ms support in windows os only
 
-        private OleDbConnection GetOleDbConnection()
-        {
-            return new OleDbConnection(dbcon);
-        }
+                catch (Exception)
 
-        [SupportedOSPlatform("windows")] // adding because ms support in windows os only
+                {
 
+                    throw;
 
-        private bool SaveData(string qry, OleDbConnection con)
-        {
-            bool isSaved = false;
-            try
-            {
-                OleDbCommand cmd = new OleDbCommand(qry, con);
-                cmd.ExecuteNonQuery();
-                isSaved = true;
-            }
+                }
 
-            catch (Exception)
-            {
-                throw;
             }
 
             return isSaved;
 
         }
+
+
+
+        private string SaveImage(IFormFile file, string folderName)
+
+        {
+
+            string imagepath = "";
+
+            try
+
+            {
+
+                string uploadfolder = Path.Combine(webhost.WebRootPath, "images/" + folderName);
+
+                imagepath = Guid.NewGuid().ToString() + "_" + file.FileName;
+
+                string filepath = Path.Combine(uploadfolder, imagepath);
+
+                using (var filestream = new FileStream(filepath, FileMode.Create))
+
+                {
+
+                    file.CopyTo(filestream);
+
+                }
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+            return imagepath;
+
+        }
+
+
+
+        private bool SaveData(string qry, SqlConnectionClass con)
+
+        {
+
+            bool isSaved = false;
+
+            try
+
+            {
+
+                SqlCommand cmd = new SqlCommand(qry, con);
+
+                cmd.ExecuteNonQuery();
+
+                isSaved = true;
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+            return isSaved;
+
+        }
+
+
+
+        public List<Driver> GetAllDrivers()
+
+        {
+
+            throw new NotImplementedException();
+
+        }
+
+
+
+        public bool BookingNow(Rent rent)
+
+        {
+
+            throw new NotImplementedException();
+
+        }
+
     }
 
 }

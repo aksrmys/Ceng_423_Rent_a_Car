@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model IEnumerable<Ceng_423_Rent_a_Car.Models.Rent>
+﻿@model IEnumerable<Ceng_423_Rent_a_Car.Models.Rent>
 @{
     ViewData["Title"] = "Rent";
 }
@@ -50,7 +47,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr itemid="row-@item.Id" style="display:none;">
+                                <tr id="row-@item.Id" style="display:none;">
                                     <td colspan="7">
                                         <table class="table table-responsive table-bordered text-center">
                                             <thead>

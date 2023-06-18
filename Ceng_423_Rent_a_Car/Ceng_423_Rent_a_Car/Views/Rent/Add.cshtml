@@ -18,45 +18,44 @@
                             <div class="mb-3">
                                 <h5 class="text-info">Location Details</h5>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row" >
                                 <label class="col-3 col-form-label text-info">PickUp</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.PickUp, new {@class="form-control",placeHolder="Enter PickUp"})
                                 </div>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row" >
                                 <label class="col-3 col-form-label text-info">DropOff</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.DropOff, new {@class="form-control",placeHolder="Enter DropOff"})
                                 </div>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row" >
                                 <label class="col-3 col-form-label text-info">PickUp Date</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.PickUpDate, new {@class="form-control",type="datetime-local"})
                                 </div>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row" >
                                 <label class="col-3 col-form-label text-info">DropOff Date</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.DropOffDate, new {@class="form-control",type="datetime-local"})
                                 </div>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row">
                                 <label class="col-3 col-form-label text-info">Total Run</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.TotalRun, new {@class="form-control",placeholder="Enter Total Run(in KM)"})
                                 </div>
                             </div>
-                            <div class="mb-3" row>
+                            <div class="mb-3 row">
                                 <label class="col-3 col-form-label text-info">Rate</label>
                                 <div class="col-9">
                                     @Html.TextBoxFor(m => m.Rate, new {@class="form-control",placeholder="Enter Rate(per KM)"})
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <button class="btn btn-sm btn-primary p-2" type="button"
-                                        onclick="showCarDetails()">Next</button>
+                            <div class="mb-3 row">
+                                <button class="btn btn-sm btn-primary p-2" type="button" onclick="showCarDetails()">Next</button>
                             </div>
                         </div>
                         <div id ="cardetails" style="display:none;">
@@ -130,7 +129,7 @@
             success: function (data) { 
                 let options = "";
                 for (let item of data){
-                    optins += '<option value=${item}>${item}</option>';
+                    options += '<option value=${item}>${item}</option>';
                 }
                 $('#branddl').append(options);
             },
