@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace Ceng_423_Rent_a_Car.Repository
 {
