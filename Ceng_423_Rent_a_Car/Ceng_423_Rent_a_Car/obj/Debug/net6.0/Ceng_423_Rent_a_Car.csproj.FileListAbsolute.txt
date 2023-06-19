@@ -161,14 +161,3 @@ C:\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.
 C:\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.dll
 C:\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\refint\Ceng_423_Rent_a_Car.dll
 C:\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.pdb
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.csproj.AssemblyReference.cache
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.AssemblyInfoInputs.cache
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.AssemblyInfo.cs
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.csproj.CoreCompileInputs.cache
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.RazorAssemblyInfo.cache
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.RazorAssemblyInfo.cs
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.dll
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\refint\Ceng_423_Rent_a_Car.dll
-C:\Users\nihal\Desktop\Ceng_423_Rent_a_Car\Ceng_423_Rent_a_Car\obj\Debug\net6.0\Ceng_423_Rent_a_Car.pdb
